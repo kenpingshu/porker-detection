@@ -14,10 +14,14 @@ class Detection
 
     public function detect(array $cards)
     {
-        if ($cards[0]['number'] === $cards[1]['number']) {
-            return 'OnePair';
+        foreach ($cards as $idx => $card) {
+            foreach ($cards as $idx2 => $check_card)  {
+                if ($idx === $idx2)
+                    continue;
+                if ($card['number'] === $check_card['number'])
+                    return 'OnePair';
+            }
         }
-
         return 'HighCard';
     }
 }

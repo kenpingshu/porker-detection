@@ -39,7 +39,7 @@ class DetectionTest extends TestCase
     {
         $expected = 'OnePair';
         $detection = new \PokerDetection\Detection();
-        $cards = [
+        $cards1 = [
             [
                 'number' => 'A',
                 'suits' => 'Diamonds',
@@ -61,8 +61,30 @@ class DetectionTest extends TestCase
                 'suits' => 'Diamonds',
             ],
         ];
-        $result = $detection->detect($cards);
+        $cards2 = [
+            [
+                'number' => 'A',
+                'suits' => 'Diamonds',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Spades',
+            ],
+            [
+                'number' => 'A',
+                'suits' => 'Hearts',
+            ],
+            [
+                'number' => '7',
+                'suits' => 'Clubs',
+            ],
+            [
+                'number' => '9',
+                'suits' => 'Diamonds',
+            ],
+        ];
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, $detection->detect($cards1));
+        $this->assertEquals($expected, $detection->detect($cards2));
     }
 }

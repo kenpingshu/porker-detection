@@ -14,6 +14,9 @@ class Detection
 
     public function detect(array $cards)
     {
+        if ($cards[0]['number'] === $cards[1]['number'])
+            return 'OnePair';
+
         return 'HighCard';
     }
 }

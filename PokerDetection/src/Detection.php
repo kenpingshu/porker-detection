@@ -12,4 +12,8 @@ namespace PokerDetection;
 class Detection
 {
 
+    public function detect(array $cards)
+    {
+        return 'HighCard';
+    }
 }

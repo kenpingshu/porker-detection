@@ -7,6 +7,31 @@ class DetectionTest extends TestCase
     public function testShouldBeHighCard()
     {
         $expected = 'HighCard';
-        $this->assertEquals($expected,'HighCard');
+        $detection = new \PokerDetection\Detection();
+        $cards = [
+            [
+                'number' => 'A',
+                'suits' => 'Diamonds',
+            ],
+            [
+                'number' => '3',
+                'suits' => 'Spades',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Hearts',
+            ],
+            [
+                'number' => '7',
+                'suits' => 'Clubs',
+            ],
+            [
+                'number' => '9',
+                'suits' => 'Diamonds',
+            ],
+        ];
+        $result = $detection->detect($cards);
+
+        $this->assertEquals($expected, $result);
     }
 }

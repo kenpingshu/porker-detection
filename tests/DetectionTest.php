@@ -83,10 +83,33 @@ class DetectionTest extends TestCase
                 'suits' => 'Diamonds',
             ],
         ];
-
+        $cards3 = [
+            [
+                'number' => 'A',
+                'suits' => 'Diamonds',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Spades',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Hearts',
+            ],
+            [
+                'number' => '7',
+                'suits' => 'Clubs',
+            ],
+            [
+                'number' => '9',
+                'suits' => 'Diamonds',
+            ],
+        ];
         $detection = new \PokerDetection\Detection($cards1);
         $this->assertEquals($expected, $detection->detect());
         $detection->setCards($cards2);
+        $this->assertEquals($expected, $detection->detect());
+        $detection->setCards($cards3);
         $this->assertEquals($expected, $detection->detect());
     }
 }

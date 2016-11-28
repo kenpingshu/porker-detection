@@ -4,6 +4,36 @@ use PHPUnit\Framework\TestCase;
 
 class DetectionTest extends TestCase
 {
+    public function testShouldBeTwoPair()
+    {
+        $expected = 'TwoPair';
+        $cards = [
+            [
+                'number' => 'A',
+                'suits' => 'Diamonds',
+            ],
+            [
+                'number' => 'A',
+                'suits' => 'Spades',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Hearts',
+            ],
+            [
+                'number' => '5',
+                'suits' => 'Clubs',
+            ],
+            [
+                'number' => '9',
+                'suits' => 'Diamonds',
+            ],
+        ];
+        $detection = new \PokerDetection\Detection($cards);
+        $result = $detection->detect();
+
+        $this->assertEquals($expected, $result);
+    }
     public function testShouldBeHighCard()
     {
         $expected = 'HighCard';

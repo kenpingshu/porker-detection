@@ -7,7 +7,6 @@ class DetectionTest extends TestCase
     public function testShouldBeHighCard()
     {
         $expected = 'HighCard';
-        $detection = new \PokerDetection\Detection();
         $cards = [
             [
                 'number' => 'A',
@@ -30,7 +29,8 @@ class DetectionTest extends TestCase
                 'suits' => 'Diamonds',
             ],
         ];
-        $result = $detection->detect($cards);
+        $detection = new \PokerDetection\Detection($cards);
+        $result = $detection->detect();
 
         $this->assertEquals($expected, $result);
     }
@@ -38,7 +38,7 @@ class DetectionTest extends TestCase
     public function testShouldBeOnePair()
     {
         $expected = 'OnePair';
-        $detection = new \PokerDetection\Detection();
+
         $cards1 = [
             [
                 'number' => 'A',
@@ -84,7 +84,9 @@ class DetectionTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $detection->detect($cards1));
-        $this->assertEquals($expected, $detection->detect($cards2));
+        $detection = new \PokerDetection\Detection($cards1);
+        $this->assertEquals($expected, $detection->detect());
+        $detection->setCards($cards2);
+        $this->assertEquals($expected, $detection->detect());
     }
 }

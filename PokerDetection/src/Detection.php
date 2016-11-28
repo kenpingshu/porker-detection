@@ -11,17 +11,38 @@ namespace PokerDetection;
 
 class Detection
 {
+    private $cards;
 
-    public function detect(array $cards)
+    public function __construct(array $cards)
     {
-        foreach ($cards as $idx => $card) {
-            foreach ($cards as $idx2 => $check_card)  {
+        $this->cards = $cards;
+    }
+
+    public function detect()
+    {
+        $final = 'HighCard';
+        if ($this->checkOnePair($this->cards)){
+            return 'OnePair';
+        }
+        return $final;
+    }
+
+    private function checkOnePair()
+    {
+        foreach ($this->cards as $idx => $card) {
+            foreach ($this->cards as $idx2 => $check_card) {
                 if ($idx === $idx2)
                     continue;
                 if ($card['number'] === $check_card['number'])
-                    return 'OnePair';
+                    return true;
             }
         }
-        return 'HighCard';
+        return false;
     }
+
+    public function setCards($cards)
+    {
+        $this->cards = $cards;
+    }
+
 }

@@ -21,10 +21,13 @@ class Detection
     public function detect()
     {
         $final = 'HighCard';
-        if ($this->isTwoPair($this->cards)){
+        if ($this->isThreeOfAKind($this->cards)) {
+            return 'Three of a kind';
+        }
+        if ($this->isTwoPair($this->cards)) {
             return 'TwoPair';
         }
-        if ($this->isOnePair($this->cards)){
+        if ($this->isOnePair($this->cards)) {
             return 'OnePair';
         }
         return $final;
@@ -61,12 +64,30 @@ class Detection
 
     private function removeCards($cards, $remove_cards)
     {
-        foreach ($remove_cards as $card){
-            if (($key = array_search($card, $cards)) !== false){
+        foreach ($remove_cards as $card) {
+            if (($key = array_search($card, $cards)) !== false) {
                 unset($cards[$key]);
             }
         }
         return $cards;
+    }
+
+    private function isThreeOfAKind($cards)
+    {
+
+        foreach ($cards as $idx => $card) {
+            $meet_cards = [$card];
+            foreach ($cards as $idx2 => $check_card) {
+                if ($idx === $idx2)
+                    continue;
+                if ($card['number'] === $check_card['number']) {
+                    array_push($meet_cards, $check_card);
+                    if (count($meet_cards) == 3)
+                        return $meet_cards;
+                }
+            }
+        }
+        return false;
     }
 
 }

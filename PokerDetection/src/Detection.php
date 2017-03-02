@@ -12,7 +12,12 @@ namespace PokerDetection;
 class Detection
 {
     private $cards;
+    private $handType = [];
 
+    public function setHandType(PorkerHandInterface $type)
+    {
+        $this->handType[] = $type;
+    }
     public function __construct(array $cards)
     {
         $this->cards = $cards;
@@ -21,15 +26,20 @@ class Detection
     public function detect()
     {
         $final = 'HighCard';
-        if ($this->isThreeOfAKind($this->cards)) {
-            return 'Three of a kind';
+        foreach ($this->handType as $type)  {
+            if ($type->isMatch()) {
+                return $type->getHandType;
+            }
         }
-        if ($this->isTwoPair($this->cards)) {
-            return 'TwoPair';
-        }
-        if ($this->isOnePair($this->cards)) {
-            return 'OnePair';
-        }
+//        if ($this->isThreeOfAKind($this->cards)) {
+//            return 'Three of a kind';
+//        }
+//        if ($this->isTwoPair($this->cards)) {
+//            return 'TwoPair';
+//        }
+//        if ($this->isOnePair($this->cards)) {
+//            return 'OnePair';
+//        }
         return $final;
     }
 
